@@ -11,14 +11,14 @@ RUN chown php:php /usr/local/bin/composer
 RUN mkdir /var/src
 RUN chown -R php:php /var/src
 
-WORKDIR /var/src
-
-COPY ./src /var/src
+COPY . /usr/bin/app
+WORKDIR /usr/bin/app
 
 RUN composer install
 
 USER php
 
-COPY entrypoint.sh /entrypoint.sh
+# COPY entrypoint.sh /entrypoint.sh
+# ENTRYPOINT ["/entrypoint.sh"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["php", "-f", "/usr/bin/app/app.php"]
