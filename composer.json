@@ -8,6 +8,9 @@
             "email": "rosven9856@gmail.com"
         }
     ],
+    "require": {
+        "php": "^8.3"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.42",
         "friendsofphp/php-cs-fixer": "^3.57",
