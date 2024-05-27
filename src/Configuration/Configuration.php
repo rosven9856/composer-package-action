@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace App\Configuration;
 
+use const ROOT;
+
 final class Configuration
 {
     protected readonly array $options;
 
     /**
-     *
+     * @use
      */
     public function __construct ()
     {
-        $directory = !empty(getenv('BUILD_DIRECTORY')) ? getenv('BUILD_DIRECTORY') : '.build';
-        $fileName  = !empty(getenv('BUILD_FILE_NAME')) ? getenv('BUILD_FILE_NAME') : 'package.zip';
+        $directory = (string) getenv('BUILD_DIRECTORY');
+        $fileName  = (string) getenv('BUILD_FILE_NAME');
+
+        $directory = !empty($directory) ? $directory : '.build';
+        $fileName  = !empty($fileName) ? $fileName : 'package.zip';
+
+        if (!defined('ROOT')) {
+            define('ROOT', '');
+        }
 
         $this->options = [
             'build' => [
@@ -34,14 +43,14 @@ final class Configuration
         $target = $this->options;
 
         foreach ($keys as $key) {
-            if (!empty($target[$key])) {
+            if (isset($target[$key])) {
                 $target = $target[$key];
             } else {
                 return null;
             }
         }
 
-        if (empty($target)) {
+        if (!isset($target)) {
             return null;
         }
 

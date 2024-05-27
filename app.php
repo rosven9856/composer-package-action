@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-define('ROOT', __DIR__);
-
 require __DIR__ . '/vendor/autoload.php';
+
+const ROOT = __DIR__;
 
 try {
     $core = new App\Action();
