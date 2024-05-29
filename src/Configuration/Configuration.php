@@ -56,4 +56,9 @@ final class Configuration
 
         return $target;
     }
+
+    public function getRootDirectory (): string
+    {
+        return realpath($this->get('build.directory') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+    }
 }
