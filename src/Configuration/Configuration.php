@@ -15,10 +15,10 @@ final class Configuration
      */
     public function __construct ()
     {
-        $directory = (string) getenv('BUILD_DIRECTORY');
+        $dirName = (string) getenv('BUILD_DIRECTORY_NAME');
         $fileName  = (string) getenv('BUILD_FILE_NAME');
 
-        $directory = !empty($directory) ? $directory : '.build';
+        $dirName = !empty($dirName) ? $dirName : '.build';
         $fileName  = !empty($fileName) ? $fileName : 'package.zip';
 
         if (!defined('ROOT')) {
@@ -27,8 +27,8 @@ final class Configuration
 
         $this->options = [
             'build' => [
-                'directory' => ROOT . '/' . $directory,
-                'file' => ROOT . '/' . $directory . '/' . $fileName,
+                'directory' => ROOT . '/' . $dirName,
+                'file' => ROOT . '/' . $dirName . '/' . $fileName,
             ]
         ];
     }

@@ -1,0 +1,15 @@
+name: "Composer package build"
+description: "Composer package build from repository using GitHub Actions"
+inputs:
+  BUILD_DIRECTORY_NAME:
+    description: "build directory name"
+    default: ".build"
+  BUILD_FILE_NAME:
+    description: "package file name"
+    default: "package.zip"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.BUILD_DIRECTORY_NAME }}
+    - ${{ inputs.BUILD_FILE_NAME }}
