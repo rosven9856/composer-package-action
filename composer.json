@@ -47,6 +47,6 @@
         "rector": "rector process",
         "require-checker": "composer-require-checker check --config-file=composer-require-checker.json composer.json",
         "test": "phpunit",
-        "unused": "composer-unused"
+        "unused": "composer-unused --excludePackage=ext-zip"
     }
 }
