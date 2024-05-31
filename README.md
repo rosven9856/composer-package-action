@@ -4,10 +4,15 @@
 
 build
 ```shell
-docker build . --build-arg=PHP_VERSION=8.3.7-1 --label=composer-package-action:latest
+docker build . --build-arg=PHP_VERSION=8.3.7-1 -t=composer-package-action
 ```
 
-run
+initialization
 ```shell
-docker run --rm -v .:/usr/bin/app  composer-package-action:latest php app.php
+docker run --rm -v .:/usr/bin/app composer-package-action composer install
+```
+
+running
+```shell
+docker run --rm -v .:/usr/bin/app composer-package-action
 ```
