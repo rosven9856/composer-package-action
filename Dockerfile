@@ -1,4 +1,4 @@
-ARG PHP_VERSION
+ARG PHP_VERSION=8.3.7-1
 
 FROM rosven9856/php:$PHP_VERSION
 
@@ -8,17 +8,19 @@ RUN adduser -G php --system -D -s /bin/sh -u 1000 php
 RUN chown php:php /home/php
 RUN chown php:php /usr/local/bin/composer
 
-RUN mkdir /var/src
-RUN chown -R php:php /var/src
+RUN mkdir /usr/bin/app
+RUN chown -R php:php /usr/bin/app
 
-WORKDIR /var/src
-
-COPY ./src /var/src
+COPY . /usr/bin/app
+WORKDIR /usr/bin/app
 
 RUN composer install
+
+VOLUME ["/usr/bin/app"]
 
 USER php
 
 COPY entrypoint.sh /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
+
+# CMD ["php", "-f", "/usr/bin/app/app.php"]

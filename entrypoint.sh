@@ -1,3 +1,3 @@
 #!/bin/sh
 
-php /var/src/app.php
+php /usr/bin/app/app.php

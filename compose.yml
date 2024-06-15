@@ -1,0 +1,12 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+    environment:
+      BUILD_DIRECTORY: ${BUILD_DIRECTORY}
+      BUILD_FILE_NAME: ${BUILD_FILE_NAME}
+    volumes:
+      - .:/usr/bin/app
