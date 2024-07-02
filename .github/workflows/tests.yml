@@ -3,7 +3,7 @@ name: tests
 on:
   pull_request: ~
   push:
-    branches: ['*.*.x']
+    branches: ['*.*.*']
 
 env:
   BRANCH: ${{ github.head_ref || github.ref_name }}
