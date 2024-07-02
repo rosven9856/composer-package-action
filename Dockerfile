@@ -20,7 +20,4 @@ VOLUME ["/usr/bin/app"]
 
 USER php
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-# CMD ["php", "-f", "/usr/bin/app/app.php"]
+CMD ["php", "-f", "/usr/bin/app/app.php"]

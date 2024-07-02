@@ -9,7 +9,7 @@ inputs:
     default: "package.zip"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "action.Dockerfile"
   args:
     - ${{ inputs.BUILD_DIRECTORY_NAME }}
     - ${{ inputs.BUILD_FILE_NAME }}
