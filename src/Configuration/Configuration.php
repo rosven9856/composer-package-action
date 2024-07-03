@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Configuration;
 
-use const ROOT;
-
 final class Configuration
 {
     protected readonly array $options;
@@ -15,20 +13,19 @@ final class Configuration
      */
     public function __construct ()
     {
+        $root = (string) getenv('GITHUB_WORKSPACE');
         $dirName = (string) getenv('BUILD_DIRECTORY_NAME');
         $fileName  = (string) getenv('BUILD_FILE_NAME');
 
+        $root = !empty($root) ? $root : realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
         $dirName = !empty($dirName) ? $dirName : '.build';
         $fileName  = !empty($fileName) ? $fileName : 'package.zip';
 
-        if (!defined('ROOT')) {
-            define('ROOT', '');
-        }
-
         $this->options = [
+            'root' => $root,
             'build' => [
-                'directory' => ROOT . '/' . $dirName,
-                'file' => ROOT . '/' . $dirName . '/' . $fileName,
+                'directory' => $root . DIRECTORY_SEPARATOR . $dirName,
+                'file' => $root . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $fileName,
             ]
         ];
     }
@@ -57,8 +54,11 @@ final class Configuration
         return $target;
     }
 
+    /**
+     * @return string
+     */
     public function getRootDirectory (): string
     {
-        return realpath($this->get('build.directory') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+        return (string) $this->get('root');
     }
 }

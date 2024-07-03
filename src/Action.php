@@ -20,17 +20,18 @@ class Action
 
     /**
      * @return void
+     * @throws \Exception
      */
     public function run()
     {
         if (!extension_loaded('zip')) {
-            // throw
+            throw new \Exception('ZIP extension is not loaded');
         }
 
-        $directory = $this->configuration->get('build.directory');
+        $directory = (string) $this->configuration->get('build.directory');
 
         if (is_dir($directory)) {
-            // throw
+            throw new \Exception('Directory "' . $directory . '" is already exists');
         }
 
         // rights
@@ -38,8 +39,8 @@ class Action
         mkdir($directory, 0755, true);
 
         $zip = new \ZipArchive();
-        if (!$zip->open($this->configuration->get('build.file'), \ZipArchive::CREATE)) {
-            // throw
+        if ($zip->open((string) $this->configuration->get('build.file'), \ZipArchive::CREATE) !== true) {
+            throw new \Exception('Failed to create zip archive');
         }
 
         $rootDirectory = $this->configuration->getRootDirectory();
@@ -50,6 +51,10 @@ class Action
         );
 
         foreach ($iterator as $path) {
+
+            /**
+             * @var \SplFileInfo $path
+             */
 
             // exclude files described in .gitignore
 

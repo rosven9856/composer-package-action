@@ -5,23 +5,45 @@ namespace App\Configuration;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @uses constant(ROOT)
+ * @uses Configuration
  */
 class ConfigurationTest extends TestCase
 {
     protected function setUp(): void
     {
-        define('ROOT', '/tests');
+
     }
 
     /**
-     * @covers ROOT
+     * @covers Configuration::get
      * @return void
      */
-    public function testCheckDefaultOptions()
+    public function testCheckDefaultOptionRoot()
     {
         $configuration = new Configuration();
 
-        $this->assertEquals($configuration->get('build.directory'), '/tests/.build');
+        $this->assertEquals($configuration->get('root'), '/usr/bin/app');
+    }
+
+    /**
+     * @covers Configuration::get
+     * @return void
+     */
+    public function testCheckDefaultOptionBuildDirectory()
+    {
+        $configuration = new Configuration();
+
+        $this->assertEquals($configuration->get('build.directory'), '/usr/bin/app/.build');
+    }
+
+    /**
+     * @covers Configuration::get
+     * @return void
+     */
+    public function testCheckDefaultOptionBuildFile()
+    {
+        $configuration = new Configuration();
+
+        $this->assertEquals($configuration->get('build.file'), '/usr/bin/app/.build/package.zip');
     }
 }
