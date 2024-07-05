@@ -4,7 +4,7 @@
 
 build
 ```shell
-docker build . --build-arg=PHP_VERSION=8.3.7-1 -t=composer-package-action
+docker build . --build-arg=PHP_VERSION=8.3.8-1 -t=composer-package-action
 ```
 
 initialization
