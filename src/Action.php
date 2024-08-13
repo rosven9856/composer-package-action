@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use Automattic\IgnoreFile;
 use App\Configuration\Configuration;
 
 class Action
@@ -38,6 +39,8 @@ class Action
 
         mkdir($directory, 0755, true);
 
+        $ignore = new IgnoreFile();
+
         $zip = new \ZipArchive();
         if ($zip->open((string) $this->configuration->get('build.file'), \ZipArchive::CREATE) !== true) {
             throw new \Exception('Failed to create zip archive');
@@ -55,10 +58,24 @@ class Action
             /**
              * @var \SplFileInfo $path
              */
+            if ($path->getBasename() === '.gitignore') {
+                $ignore->add(
+                    file_get_contents($path->getRealPath()),
+                    dirname($path->getRealPath()) . '/'
+                );
+            }
+        }
 
-            // exclude files described in .gitignore
+        foreach ($iterator as $path) {
 
-            if ($path->isFile()) {
+            /**
+             * @var \SplFileInfo $path
+             */
+            if (!$path->isFile()) {
+                continue;
+            }
+
+            if (!$ignore->ignores($path->getPathname())) {
                 $zip->addFile($path->getPathname(), str_replace($rootDirectory . DIRECTORY_SEPARATOR, '', $path->getPathname()));
             }
         }
