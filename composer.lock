@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cda91c09d4ea6c67fe4d8603431c982",
-    "packages": [],
+    "content-hash": "d35c04715039a6d5702d2e5941866b4f",
+    "packages": [
+        {
+            "name": "automattic/ignorefile",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Automattic/ignorefile.git",
+                "reference": "10067c1ca0696d0a3c1912ae19f7a6f0754c6178"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Automattic/ignorefile/zipball/10067c1ca0696d0a3c1912ae19f7a6f0754c6178",
+                "reference": "10067c1ca0696d0a3c1912ae19f7a6f0754c6178",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "automattic/jetpack-changelogger": "^4.1.0",
+                "yoast/phpunit-polyfills": "1.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "mirror-repo": "Automattic/ignorefile",
+                "changelogger": {
+                    "link-template": "https://github.com/Automattic/ignorefile/compare/v${old}...v${new}"
+                },
+                "autotagger": true,
+                "branch-alias": {
+                    "dev-trunk": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "Handle .gitignore style files.",
+            "support": {
+                "source": "https://github.com/Automattic/ignorefile/tree/v2.0.0"
+            },
+            "time": "2024-02-07T20:37:13+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "amphp/amp",
