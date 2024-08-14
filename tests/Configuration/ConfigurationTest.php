@@ -39,14 +39,14 @@ class ConfigurationTest extends TestCase
      */
     private const string OTHER_ENV_BUILD_FILE_NAME = 'build_file.zip';
 
-    protected Configuration $configuration;
+    //protected Configuration $configuration;
 
     #[\Override]
     protected function setUp(): void
     {
-        putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
+        //putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
 
-        $this->configuration = new Configuration();
+        //$this->configuration = new Configuration();
     }
 
     /**
