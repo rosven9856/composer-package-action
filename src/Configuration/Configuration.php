@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Configuration;
 
-final class Configuration
+final readonly class Configuration
 {
-    protected readonly array $options;
+    protected array $options;
 
     /**
      * @use
