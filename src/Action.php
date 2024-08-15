@@ -84,21 +84,20 @@ class Action
 
 
 
-        $GITHUB_OUTPUT = getenv('GITHUB_OUTPUT');
+        $GITHUB_OUTPUT = (string) $this->configuration->get('GITHUB_OUTPUT');
 
-        var_dump($GITHUB_OUTPUT);
-        exit;
+        if (!empty($GITHUB_OUTPUT)) {
 
+            $name = 'directory';
+            $value = (string) $this->configuration->get('build.directory');
 
-        $name = 'directory';
-        $value = (string) $this->configuration->get('build.directory');
-
-        file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
+            file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
 
 
-        $name = 'path';
-        $value = (string) $this->configuration->get('build.file');
+            $name = 'path';
+            $value = (string) $this->configuration->get('build.file');
 
-        file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
+            file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
+        }
     }
 }
