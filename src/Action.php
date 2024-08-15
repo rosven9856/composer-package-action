@@ -81,5 +81,21 @@ class Action
         }
 
         $zip->close();
+
+
+
+        $GITHUB_OUTPUT = getenv('GITHUB_OUTPUT');
+
+
+        $name = 'directory';
+        $value = (string) $this->configuration->get('build.directory');
+
+        file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
+
+
+        $name = 'path';
+        $value = (string) $this->configuration->get('build.file');
+
+        file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
     }
 }

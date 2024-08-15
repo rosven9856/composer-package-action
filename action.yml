@@ -7,6 +7,11 @@ inputs:
   BUILD_FILE_NAME:
     description: "package file name"
     default: "package.zip"
+outputs:
+  directory:
+    description: 'The path to the building directory'
+  path:
+    description: 'The path to the compiled package archive'
 runs:
   using: "docker"
   image: "action.Dockerfile"
