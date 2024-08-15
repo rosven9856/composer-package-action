@@ -86,6 +86,9 @@ class Action
 
         $GITHUB_OUTPUT = getenv('GITHUB_OUTPUT');
 
+        var_dump($GITHUB_OUTPUT);
+        exit;
+
 
         $name = 'directory';
         $value = (string) $this->configuration->get('build.directory');
