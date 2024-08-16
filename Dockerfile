@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.3.7-1
+ARG PHP_VERSION=8.3.10-1
 
 FROM rosven9856/php:$PHP_VERSION
 
@@ -20,7 +20,4 @@ VOLUME ["/usr/bin/app"]
 
 USER php
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-# CMD ["php", "-f", "/usr/bin/app/app.php"]
+CMD ["php", "-f", "/usr/bin/app/app.php"]

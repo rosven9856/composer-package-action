@@ -1,3 +1,5 @@
-/.idea
-/.env
-/vendor
+.git
+.idea
+.env
+vendor
+.build

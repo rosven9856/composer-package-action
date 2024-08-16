@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": "^8.3",
-        "ext-zip": "*"
+        "ext-zip": "*",
+        "automattic/ignorefile": "^2.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.42",

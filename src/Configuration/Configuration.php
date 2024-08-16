@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace App\Configuration;
 
-use const ROOT;
-
-final class Configuration
+final readonly class Configuration
 {
-    protected readonly array $options;
+    protected array $options;
 
     /**
      * @use
      */
     public function __construct ()
     {
+        $GITHUB_WORKSPACE = (string) getenv('GITHUB_WORKSPACE');
+        $GITHUB_OUTPUT = (string) getenv('GITHUB_OUTPUT');
         $dirName = (string) getenv('BUILD_DIRECTORY_NAME');
         $fileName  = (string) getenv('BUILD_FILE_NAME');
 
+        $GITHUB_WORKSPACE = !empty($GITHUB_WORKSPACE) ? $GITHUB_WORKSPACE : realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
+        $GITHUB_OUTPUT = !empty($GITHUB_OUTPUT) ? $GITHUB_OUTPUT : $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'outputcmd.txt';
         $dirName = !empty($dirName) ? $dirName : '.build';
         $fileName  = !empty($fileName) ? $fileName : 'package.zip';
 
-        if (!defined('ROOT')) {
-            define('ROOT', '');
-        }
-
         $this->options = [
+            'GITHUB_WORKSPACE' => $GITHUB_WORKSPACE,
+            'GITHUB_OUTPUT' => $GITHUB_OUTPUT,
             'build' => [
-                'directory' => ROOT . '/' . $dirName,
-                'file' => ROOT . '/' . $dirName . '/' . $fileName,
-            ]
+                'directory' => $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . $dirName,
+                'file' => $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $fileName,
+            ],
         ];
     }
 
@@ -57,8 +57,11 @@ final class Configuration
         return $target;
     }
 
+    /**
+     * @return string
+     */
     public function getRootDirectory (): string
     {
-        return realpath($this->get('build.directory') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+        return (string) $this->get('GITHUB_WORKSPACE');
     }
 }
