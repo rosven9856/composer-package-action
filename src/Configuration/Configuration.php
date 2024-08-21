@@ -6,20 +6,20 @@ namespace App\Configuration;
 
 final readonly class Configuration
 {
-    protected array $options;
+    private array $options;
 
     /**
      * @use
      */
-    public function __construct ()
+    public function __construct()
     {
         $GITHUB_WORKSPACE = (string) getenv('GITHUB_WORKSPACE');
         $GITHUB_OUTPUT = (string) getenv('GITHUB_OUTPUT');
         $dirName = (string) getenv('BUILD_DIRECTORY_NAME');
         $fileName  = (string) getenv('BUILD_FILE_NAME');
 
-        $GITHUB_WORKSPACE = !empty($GITHUB_WORKSPACE) ? $GITHUB_WORKSPACE : realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
-        $GITHUB_OUTPUT = !empty($GITHUB_OUTPUT) ? $GITHUB_OUTPUT : $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'outputcmd.txt';
+        $GITHUB_WORKSPACE = !empty($GITHUB_WORKSPACE) ? $GITHUB_WORKSPACE : realpath(__DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..');
+        $GITHUB_OUTPUT = !empty($GITHUB_OUTPUT) ? $GITHUB_OUTPUT : $GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . 'var' . \DIRECTORY_SEPARATOR . 'outputcmd.txt';
         $dirName = !empty($dirName) ? $dirName : '.build';
         $fileName  = !empty($fileName) ? $fileName : 'package.zip';
 
@@ -27,17 +27,13 @@ final readonly class Configuration
             'GITHUB_WORKSPACE' => $GITHUB_WORKSPACE,
             'GITHUB_OUTPUT' => $GITHUB_OUTPUT,
             'build' => [
-                'directory' => $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . $dirName,
-                'file' => $GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $fileName,
+                'directory' => $GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . $dirName,
+                'file' => $GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . $dirName . \DIRECTORY_SEPARATOR . $fileName,
             ],
         ];
     }
 
-    /**
-     * @param string $option
-     * @return mixed
-     */
-    public function get (string $option): mixed
+    public function get(string $option): mixed
     {
         $keys = explode('.', $option);
         $target = $this->options;
@@ -57,10 +53,7 @@ final readonly class Configuration
         return $target;
     }
 
-    /**
-     * @return string
-     */
-    public function getRootDirectory (): string
+    public function getRootDirectory(): string
     {
         return (string) $this->get('GITHUB_WORKSPACE');
     }

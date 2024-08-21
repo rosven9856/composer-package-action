@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace App;
 
-use Automattic\IgnoreFile;
 use App\Configuration\Configuration;
+use Automattic\IgnoreFile;
 
-class Action
+final readonly class Action
 {
-    protected Configuration $configuration;
+    private Configuration $configuration;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->configuration = new Configuration();
     }
 
     /**
-     * @return void
      * @throws \Exception
      */
-    public function run()
+    public function run(): void
     {
-        if (!extension_loaded('zip')) {
+        if (!\extension_loaded('zip')) {
             throw new \Exception('ZIP extension is not loaded');
         }
 
@@ -37,7 +33,7 @@ class Action
 
         // rights
 
-        mkdir($directory, 0755, true);
+        mkdir($directory, 0o755, true);
 
         $ignore = new IgnoreFile();
 
@@ -50,24 +46,22 @@ class Action
 
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($rootDirectory),
-            \RecursiveIteratorIterator::CHILD_FIRST
+            \RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         foreach ($iterator as $path) {
-
             /**
              * @var \SplFileInfo $path
              */
             if ($path->getBasename() === '.gitignore') {
                 $ignore->add(
                     file_get_contents($path->getRealPath()),
-                    dirname($path->getRealPath()) . '/'
+                    \dirname($path->getRealPath()) . '/',
                 );
             }
         }
 
         foreach ($iterator as $path) {
-
             /**
              * @var \SplFileInfo $path
              */
@@ -76,28 +70,24 @@ class Action
             }
 
             if (!$ignore->ignores($path->getPathname())) {
-                $zip->addFile($path->getPathname(), str_replace($rootDirectory . DIRECTORY_SEPARATOR, '', $path->getPathname()));
+                $zip->addFile($path->getPathname(), str_replace($rootDirectory . \DIRECTORY_SEPARATOR, '', $path->getPathname()));
             }
         }
 
         $zip->close();
 
-
-
         $GITHUB_OUTPUT = (string) $this->configuration->get('GITHUB_OUTPUT');
 
         if (!empty($GITHUB_OUTPUT)) {
-
             $name = 'directory';
             $value = (string) $this->configuration->get('build.directory');
 
-            file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
-
+            file_put_contents($GITHUB_OUTPUT, "{$name}={$value}\n", FILE_APPEND);
 
             $name = 'path';
             $value = (string) $this->configuration->get('build.file');
 
-            file_put_contents($GITHUB_OUTPUT, "$name=$value\n", FILE_APPEND);
+            file_put_contents($GITHUB_OUTPUT, "{$name}={$value}\n", FILE_APPEND);
         }
     }
 }
