@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Configuration;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @uses Configuration
+ * @uses \Configuration
  */
-class ConfigurationTest extends TestCase
+final class ConfigurationTest extends TestCase
 {
     /**
      * @var string
@@ -49,19 +51,18 @@ class ConfigurationTest extends TestCase
      */
     private const string OTHER_ENV_BUILD_FILE_NAME = 'build_file.zip';
 
-    //protected Configuration $configuration;
+    // protected Configuration $configuration;
 
     #[\Override]
     protected function setUp(): void
     {
-        //putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
+        // putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
 
-        //$this->configuration = new Configuration();
+        // $this->configuration = new Configuration();
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
     public function testCheckDefaultOptionGitHubWorkspace(): void
     {
@@ -72,15 +73,14 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('GITHUB_WORKSPACE'),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE
+            self::DEFAULT_ENV_GITHUB_WORKSPACE,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
     public function testCheckDefaultGetRootDirectory(): void
     {
@@ -91,15 +91,14 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->getRootDirectory(),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE
+            self::DEFAULT_ENV_GITHUB_WORKSPACE,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
     public function testCheckDefaultOptionGitHubOutput(): void
     {
@@ -110,17 +109,16 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('GITHUB_OUTPUT'),
-            self::DEFAULT_ENV_GITHUB_OUTPUT
+            self::DEFAULT_ENV_GITHUB_OUTPUT,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
-    public function testCheckDefaultOptionBuildDirectory()
+    public function testCheckDefaultOptionBuildDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
@@ -129,17 +127,16 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('build.directory'),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME
+            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
-    public function testCheckDefaultOptionBuildFile()
+    public function testCheckDefaultOptionBuildFile(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
@@ -148,18 +145,17 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('build.file'),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME .
-             DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_FILE_NAME
+            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME .
+             \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_FILE_NAME,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
-    public function testCheckOtherOptionOptionGitHubOutput()
+    public function testCheckOtherOptionOptionGitHubOutput(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
@@ -168,15 +164,14 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('GITHUB_WORKSPACE'),
-            self::OTHER_ENV_GITHUB_WORKSPACE
+            self::OTHER_ENV_GITHUB_WORKSPACE,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
     public function testCheckOtherGetRootDirectory(): void
     {
@@ -187,15 +182,14 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->getRootDirectory(),
-            self::OTHER_ENV_GITHUB_WORKSPACE
+            self::OTHER_ENV_GITHUB_WORKSPACE,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
     public function testCheckOtherOptionGitHubOutput(): void
     {
@@ -206,17 +200,16 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('GITHUB_OUTPUT'),
-            self::OTHER_ENV_GITHUB_OUTPUT
+            self::OTHER_ENV_GITHUB_OUTPUT,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
-    public function testCheckOtherOptionBuildDirectory()
+    public function testCheckOtherOptionBuildDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
@@ -225,17 +218,16 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('build.directory'),
-            self::OTHER_ENV_GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME
+            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME,
         );
     }
 
     /**
-     * @covers Configuration::get
-     * @return void
+     * @covers \Configuration::get
      */
-    public function testCheckOtherOptionBuildFile()
+    public function testCheckOtherOptionBuildFile(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
@@ -244,10 +236,10 @@ class ConfigurationTest extends TestCase
 
         $configuration = new Configuration();
 
-        $this->assertEquals(
+        self::assertEquals(
             $configuration->get('build.file'),
-            self::OTHER_ENV_GITHUB_WORKSPACE . DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME .
-            DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_FILE_NAME
+            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME .
+            \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_FILE_NAME,
         );
     }
 }
