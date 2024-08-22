@@ -24,12 +24,12 @@ final class ConfigurationTest extends TestCase
     /**
      * @var string
      */
-    private const string DEFAULT_ENV_BUILD_DIRECTORY_NAME = '.build';
+    private const string DEFAULT_ENV_DIRECTORY = '.build';
 
     /**
      * @var string
      */
-    private const string DEFAULT_ENV_BUILD_FILE_NAME = 'package.zip';
+    private const string DEFAULT_ENV_FILE = 'package.zip';
 
     /**
      * @var string
@@ -44,12 +44,12 @@ final class ConfigurationTest extends TestCase
     /**
      * @var string
      */
-    private const string OTHER_ENV_BUILD_DIRECTORY_NAME = '.build_directory';
+    private const string OTHER_ENV_DIRECTORY = '.build_directory';
 
     /**
      * @var string
      */
-    private const string OTHER_ENV_BUILD_FILE_NAME = 'build_file.zip';
+    private const string OTHER_ENV_FILE = 'build_file.zip';
 
     // protected Configuration $configuration;
 
@@ -68,8 +68,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::DEFAULT_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::DEFAULT_ENV_DIRECTORY);
+        putenv('file=' . self::DEFAULT_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -86,8 +86,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::DEFAULT_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::DEFAULT_ENV_DIRECTORY);
+        putenv('file=' . self::DEFAULT_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -104,8 +104,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::DEFAULT_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::DEFAULT_ENV_DIRECTORY);
+        putenv('file=' . self::DEFAULT_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -122,14 +122,14 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::DEFAULT_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::DEFAULT_ENV_DIRECTORY);
+        putenv('file=' . self::DEFAULT_ENV_FILE);
 
         $configuration = new Configuration();
 
         self::assertEquals(
             $configuration->get('build.directory'),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME,
+            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_DIRECTORY,
         );
     }
 
@@ -140,15 +140,15 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::DEFAULT_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::DEFAULT_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::DEFAULT_ENV_DIRECTORY);
+        putenv('file=' . self::DEFAULT_ENV_FILE);
 
         $configuration = new Configuration();
 
         self::assertEquals(
             $configuration->get('build.file'),
-            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_DIRECTORY_NAME .
-             \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_BUILD_FILE_NAME,
+            self::DEFAULT_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_DIRECTORY .
+             \DIRECTORY_SEPARATOR . self::DEFAULT_ENV_FILE,
         );
     }
 
@@ -159,8 +159,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::OTHER_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::OTHER_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::OTHER_ENV_DIRECTORY);
+        putenv('file=' . self::OTHER_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -177,8 +177,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::OTHER_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::OTHER_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::OTHER_ENV_DIRECTORY);
+        putenv('file=' . self::OTHER_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -195,8 +195,8 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::OTHER_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::OTHER_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::OTHER_ENV_DIRECTORY);
+        putenv('file=' . self::OTHER_ENV_FILE);
 
         $configuration = new Configuration();
 
@@ -213,14 +213,14 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::OTHER_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::OTHER_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::OTHER_ENV_DIRECTORY);
+        putenv('file=' . self::OTHER_ENV_FILE);
 
         $configuration = new Configuration();
 
         self::assertEquals(
             $configuration->get('build.directory'),
-            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME,
+            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_DIRECTORY,
         );
     }
 
@@ -231,15 +231,15 @@ final class ConfigurationTest extends TestCase
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
         putenv('GITHUB_OUTPUT=' . self::OTHER_ENV_GITHUB_OUTPUT);
-        putenv('BUILD_DIRECTORY_NAME=' . self::OTHER_ENV_BUILD_DIRECTORY_NAME);
-        putenv('BUILD_FILE_NAME=' . self::OTHER_ENV_BUILD_FILE_NAME);
+        putenv('directory=' . self::OTHER_ENV_DIRECTORY);
+        putenv('file=' . self::OTHER_ENV_FILE);
 
         $configuration = new Configuration();
 
         self::assertEquals(
             $configuration->get('build.file'),
-            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_DIRECTORY_NAME .
-            \DIRECTORY_SEPARATOR . self::OTHER_ENV_BUILD_FILE_NAME,
+            self::OTHER_ENV_GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . self::OTHER_ENV_DIRECTORY .
+            \DIRECTORY_SEPARATOR . self::OTHER_ENV_FILE,
         );
     }
 }

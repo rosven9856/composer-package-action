@@ -15,8 +15,8 @@ final readonly class Configuration
     {
         $GITHUB_WORKSPACE = (string) getenv('GITHUB_WORKSPACE');
         $GITHUB_OUTPUT = (string) getenv('GITHUB_OUTPUT');
-        $dirName = (string) getenv('BUILD_DIRECTORY_NAME');
-        $fileName  = (string) getenv('BUILD_FILE_NAME');
+        $dirName = (string) getenv('directory');
+        $fileName  = (string) getenv('file');
 
         $GITHUB_WORKSPACE = !empty($GITHUB_WORKSPACE) ? $GITHUB_WORKSPACE : realpath(__DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..');
         $GITHUB_OUTPUT = !empty($GITHUB_OUTPUT) ? $GITHUB_OUTPUT : $GITHUB_WORKSPACE . \DIRECTORY_SEPARATOR . 'var' . \DIRECTORY_SEPARATOR . 'outputcmd.txt';
