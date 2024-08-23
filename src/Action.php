@@ -79,12 +79,12 @@ final readonly class Action
         $GITHUB_OUTPUT = (string) $this->configuration->get('GITHUB_OUTPUT');
 
         if (!empty($GITHUB_OUTPUT)) {
-            $name = 'directory';
+            $name = 'directory_path';
             $value = (string) $this->configuration->get('build.directory');
 
             file_put_contents($GITHUB_OUTPUT, "{$name}={$value}\n", FILE_APPEND);
 
-            $name = 'path';
+            $name = 'file_path';
             $value = (string) $this->configuration->get('build.file');
 
             file_put_contents($GITHUB_OUTPUT, "{$name}={$value}\n", FILE_APPEND);
