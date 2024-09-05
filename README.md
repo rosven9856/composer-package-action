@@ -5,6 +5,7 @@
 # Building a composer package in GitHub Action
 
 [![License](https://img.shields.io/github/license/rosven9856/composer-package-action)](https://github.com/rosven9856/composer-package-action/blob/master/LICENSE)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/rosven9856/composer-package-action/tests.yml)](https://github.com/rosven9856/composer-package-action/actions/workflows/tests.yml)
 
 With this GitHub Action, you can build a package for the PHP Composer package manager.
 
