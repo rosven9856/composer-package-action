@@ -1,4 +1,4 @@
-<p align="center">
+<p style="text-align: center">
     <img width="560" height="260" src="docs/img/github_gitea_actions.jpg" alt="github gitea actions"/>
 </p>
 
@@ -50,7 +50,7 @@ The path to the compiled package archive
 
 build
 ```shell
-docker build . --build-arg=PHP_VERSION=8.3.10-1 -t=composer-package-action
+docker build . --build-arg=PHP_VERSION=8.3 -t=composer-package-action
 ```
 
 initialization
@@ -63,3 +63,7 @@ running
 docker run --rm -e GITHUB_WORKSPACE=/usr/bin/app -v .:/usr/bin/app composer-package-action php app.php
 ```
 
+testing
+```shell
+docker run --rm -e GITHUB_WORKSPACE=/usr/bin/app -v .:/usr/bin/app composer-package-action composer tests
+```
