@@ -99,7 +99,7 @@ jobs:
         with:
           composer-options: --optimize-autoloader
       - run: composer unused
-  coding-standards:
+  linter:
     runs-on: ubuntu-latest
     strategy:
       matrix:

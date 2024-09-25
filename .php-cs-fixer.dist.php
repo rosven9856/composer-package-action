@@ -20,6 +20,9 @@ $finder = Finder::create()
 
 $config = (new Config())
     ->setFinder($finder)
+    ->setRules([
+        'static_lambda' => true,
+    ])
     ->setCacheFile(__DIR__ . '/var/.php-cs-fixer.cache');
 
 (new PhpCsFixerCodingStandard())->applyTo($config);
