@@ -7,6 +7,6 @@ require __DIR__ . '/vendor/autoload.php';
 try {
     $core = new App\Action();
     $core->run();
-} catch (Exception $e) {
-    // echo $e->getMessage();
+} catch (Exception) {
+    // echo 'Error: ' . $e->getMessage() . "\n" . 'Trace: ' . $e->getTraceAsString();
 }
