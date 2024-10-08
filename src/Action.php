@@ -44,33 +44,36 @@ final readonly class Action
 
         $rootDirectory = $this->configuration->getRootDirectory();
 
-        $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($rootDirectory),
-            \RecursiveIteratorIterator::CHILD_FIRST,
-        );
+        if (is_dir($rootDirectory) && is_readable($rootDirectory) && is_writable($rootDirectory)) {
 
-        foreach ($iterator as $path) {
-            /**
-             * @var \SplFileInfo $path
-             */
-            if ($path->getBasename() === '.gitignore') {
-                $ignore->add(
-                    file_get_contents($path->getRealPath()),
-                    \dirname($path->getRealPath()) . '/',
-                );
-            }
-        }
+            $iterator = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($rootDirectory),
+                \RecursiveIteratorIterator::CHILD_FIRST,
+            );
 
-        foreach ($iterator as $path) {
-            /**
-             * @var \SplFileInfo $path
-             */
-            if (!$path->isFile()) {
-                continue;
+            foreach ($iterator as $path) {
+                /**
+                 * @var \SplFileInfo $path
+                 */
+                if ($path->getBasename() === '.gitignore') {
+                    $ignore->add(
+                        file_get_contents($path->getRealPath()),
+                        \dirname($path->getRealPath()) . '/',
+                    );
+                }
             }
 
-            if (!$ignore->ignores($path->getPathname())) {
-                $zip->addFile($path->getPathname(), str_replace($rootDirectory . \DIRECTORY_SEPARATOR, '', $path->getPathname()));
+            foreach ($iterator as $path) {
+                /**
+                 * @var \SplFileInfo $path
+                 */
+                if (!$path->isFile()) {
+                    continue;
+                }
+
+                if (!$ignore->ignores($path->getPathname())) {
+                    $zip->addFile($path->getPathname(), str_replace($rootDirectory . \DIRECTORY_SEPARATOR, '', $path->getPathname()));
+                }
             }
         }
 
