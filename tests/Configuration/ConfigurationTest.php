@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Configuration;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @uses \Configuration
- */
+#[CoversClass(Configuration::class)]
 final class ConfigurationTest extends TestCase
 {
     /**
@@ -61,9 +60,6 @@ final class ConfigurationTest extends TestCase
         // $this->configuration = new Configuration();
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckDefaultOptionGitHubWorkspace(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
@@ -79,9 +75,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckDefaultGetRootDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
@@ -97,9 +90,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckDefaultOptionGitHubOutput(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
@@ -115,9 +105,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckDefaultOptionBuildDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
@@ -133,9 +120,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckDefaultOptionBuildFile(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
@@ -152,9 +136,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckOtherOptionOptionGitHubOutput(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
@@ -170,9 +151,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckOtherGetRootDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
@@ -188,9 +166,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckOtherOptionGitHubOutput(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
@@ -206,9 +181,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckOtherOptionBuildDirectory(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);
@@ -224,9 +196,6 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Configuration::get
-     */
     public function testCheckOtherOptionBuildFile(): void
     {
         putenv('GITHUB_WORKSPACE=' . self::OTHER_ENV_GITHUB_WORKSPACE);

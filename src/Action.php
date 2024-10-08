@@ -44,6 +44,12 @@ final readonly class Action
 
         $rootDirectory = $this->configuration->getRootDirectory();
 
+        if (!is_dir($rootDirectory) || !is_readable($rootDirectory) || !is_writable($rootDirectory)) {
+            throw new \Exception(
+                \sprintf('Directory "%s" is not exists or is not readable or is not writable', $rootDirectory),
+            );
+        }
+
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($rootDirectory),
             \RecursiveIteratorIterator::CHILD_FIRST,
