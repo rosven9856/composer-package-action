@@ -64,28 +64,25 @@ final class ActionTest extends TestCase
     {
         $dir = realpath($dir);
 
-        if (is_dir($dir) && is_readable($dir) && is_writable($dir)) {
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dir),
+            \RecursiveIteratorIterator::CHILD_FIRST,
+        );
 
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($dir),
-                \RecursiveIteratorIterator::CHILD_FIRST,
-            );
+        foreach ($iterator as $path) {
 
-            foreach ($iterator as $path) {
-
-                if (!$path instanceof \SplFileInfo) {
-                    continue;
-                }
-
-                if ($path->isDir()) {
-                    rmdir((string) $path);
-                } else {
-                    unlink((string) $path);
-                }
+            if (!$path instanceof \SplFileInfo) {
+                continue;
             }
 
-            rmdir($dir);
+            if ($path->isDir()) {
+                rmdir((string) $path);
+            } else {
+                unlink((string) $path);
+            }
         }
+
+        rmdir($dir);
     }
 
     public function testBuildComposerPackage(): void
