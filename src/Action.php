@@ -44,36 +44,39 @@ final readonly class Action
 
         $rootDirectory = $this->configuration->getRootDirectory();
 
-        if (is_dir($rootDirectory) && is_readable($rootDirectory) && is_writable($rootDirectory)) {
-
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($rootDirectory),
-                \RecursiveIteratorIterator::CHILD_FIRST,
+        if (!is_dir($rootDirectory) || !is_readable($rootDirectory) || !is_writable($rootDirectory)) {
+            throw new \Exception(
+                \sprintf('Directory "%s" is not exists or is not readable or is not writable', $rootDirectory),
             );
+        }
 
-            foreach ($iterator as $path) {
-                /**
-                 * @var \SplFileInfo $path
-                 */
-                if ($path->getBasename() === '.gitignore') {
-                    $ignore->add(
-                        file_get_contents($path->getRealPath()),
-                        \dirname($path->getRealPath()) . '/',
-                    );
-                }
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($rootDirectory),
+            \RecursiveIteratorIterator::CHILD_FIRST,
+        );
+
+        foreach ($iterator as $path) {
+            /**
+             * @var \SplFileInfo $path
+             */
+            if ($path->getBasename() === '.gitignore') {
+                $ignore->add(
+                    file_get_contents($path->getRealPath()),
+                    \dirname($path->getRealPath()) . '/',
+                );
+            }
+        }
+
+        foreach ($iterator as $path) {
+            /**
+             * @var \SplFileInfo $path
+             */
+            if (!$path->isFile()) {
+                continue;
             }
 
-            foreach ($iterator as $path) {
-                /**
-                 * @var \SplFileInfo $path
-                 */
-                if (!$path->isFile()) {
-                    continue;
-                }
-
-                if (!$ignore->ignores($path->getPathname())) {
-                    $zip->addFile($path->getPathname(), str_replace($rootDirectory . \DIRECTORY_SEPARATOR, '', $path->getPathname()));
-                }
+            if (!$ignore->ignores($path->getPathname())) {
+                $zip->addFile($path->getPathname(), str_replace($rootDirectory . \DIRECTORY_SEPARATOR, '', $path->getPathname()));
             }
         }
 
