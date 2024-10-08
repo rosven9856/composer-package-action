@@ -11,17 +11,11 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Action::class)]
 final class ActionTest extends TestCase
 {
-    /**
-     * @var string
-     */
-    private const string DEFAULT_ENV_GITHUB_WORKSPACE = '/usr/bin/app';
-
     private ?Action $action;
 
     #[\Override]
     protected function setUp(): void
     {
-        putenv('GITHUB_WORKSPACE=' . self::DEFAULT_ENV_GITHUB_WORKSPACE);
         putenv('directory=.build');
 
         $this->action = new Action();
@@ -32,7 +26,6 @@ final class ActionTest extends TestCase
     #[\Override]
     protected function tearDown(): void
     {
-        putenv('GITHUB_WORKSPACE=');
         putenv('directory=');
 
         $this->removeBuildDirectory();
@@ -71,7 +64,7 @@ final class ActionTest extends TestCase
     {
         $dir = realpath($dir);
 
-        if (is_dir($dir)) {
+        if (is_dir($dir) && is_readable($dir) && is_writable($dir)) {
 
             $iterator = new \RecursiveIteratorIterator(
                 new \RecursiveDirectoryIterator($dir),

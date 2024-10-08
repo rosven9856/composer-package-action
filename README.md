@@ -55,15 +55,15 @@ docker build . --build-arg=PHP_VERSION=8.3 -t=composer-package-action
 
 initialization
 ```shell
-docker run --rm -e GITHUB_WORKSPACE=/usr/bin/app -v .:/usr/bin/app composer-package-action composer install
+docker run --rm -v .:/usr/bin/app composer-package-action composer install
 ```
 
 running
 ```shell
-docker run --rm -e GITHUB_WORKSPACE=/usr/bin/app -v .:/usr/bin/app composer-package-action php app.php
+docker run --rm -v .:/usr/bin/app composer-package-action php app.php
 ```
 
 testing
 ```shell
-docker run --rm -e GITHUB_WORKSPACE=/usr/bin/app -v .:/usr/bin/app composer-package-action composer tests
+docker run --rm -v .:/usr/bin/app composer-package-action composer tests
 ```
