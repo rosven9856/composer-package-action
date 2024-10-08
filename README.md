@@ -17,7 +17,7 @@ With this GitHub Action, you can build a package for the PHP Composer package ma
 ```yaml
     steps:
       - uses: actions/checkout@v4
-      - uses: rosven9856/composer-package-action@0.1.4
+      - uses: rosven9856/composer-package-action@0.1.5
         id: composer_package
         with:
           directory: ''
